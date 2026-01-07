@@ -58,10 +58,6 @@
       </p>
     </aside>
 
-    <aside class="limiter">
-      {{ partial "microblog_conversation.html" . }}
-    </aside>
-
     <script>
       page_data = (document.documentElement.outerHTML.length / 1024).toFixed(2);
       document.getElementById("carbon").innerHTML = page_data;
