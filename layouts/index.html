@@ -9,7 +9,7 @@
       <div class="posts-list h-feed">
         {{ $posts := where .Site.RegularPages "Type" "post" }}
         {{ $longformPosts := where $posts "Params.categories" "intersect" (slice "Longform") }}
-        {{ range $longformPosts }}
+        {{ range first 10 $longformPosts }}
         <div class="post-item h-entry">
           <time class="post-date dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">{{ .Date.Format "2 January 2006" }}</time>
           <a href="{{ .Permalink }}" class="post-link u-url">
@@ -46,11 +46,9 @@
               <span class="p-name">{{ .Date.Format "2006-01-02" }}</span>
             {{ end }}
           </a>
-          {{ if .Params.summary }}
-          <p class="post-lede p-summary">{{ .Params.summary }}</p>
-          {{ else if .Summary }}
-          <p class="post-lede p-summary">{{ .Summary | truncate 200 }}</p>
-          {{ end }}
+          <div class="e-content">
+            {{ .Content }}
+          </div>
         </div>
         {{ end }}
       </div>

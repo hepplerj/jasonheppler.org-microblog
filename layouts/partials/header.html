@@ -29,8 +29,9 @@
 
                 <div class="dropdown" id="dropdown">
                     <a href="/">Home</a>
-                    <a href="/archive/">Archive</a>
-                    <a href="/about/">About</a>
+                    {{ range .Site.Menus.main }}
+                    <a href="{{ .URL }}">{{ .Name }}</a>
+                    {{ end }}
                 </div>
             </div>
         </div>
