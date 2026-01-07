@@ -21,8 +21,6 @@
           </a>
           {{ if .Params.summary }}
           <p class="post-lede p-summary">{{ .Params.summary }}</p>
-          {{ else if .Summary }}
-          <p class="post-lede p-summary">{{ .Summary | truncate 200 }}</p>
           {{ end }}
         </div>
         {{ end }}

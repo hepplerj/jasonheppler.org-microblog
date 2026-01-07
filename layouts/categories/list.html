@@ -11,7 +11,7 @@
 
           {{ if $isMicropost }}
           <!-- Micropost style -->
-          <div class="post-item h-entry">
+          <div class="post-item h-entry micropost-item" style="background: color-mix(in srgb, var(--theme-background) 95%, var(--theme-text) 5%); padding: 1em; border-radius: 5px; margin-bottom: 1.5em;">
             <div class="e-content">
               {{ .Content }}
             </div>
@@ -32,8 +32,6 @@
             </a>
             {{ if .Params.summary }}
             <p class="post-lede p-summary">{{ .Params.summary }}</p>
-            {{ else if .Summary }}
-            <p class="post-lede p-summary">{{ .Summary | truncate 200 }}</p>
             {{ end }}
           </div>
           {{ end }}
