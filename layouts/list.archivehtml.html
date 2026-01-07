@@ -20,46 +20,22 @@
     </div>
 
     <!-- Posts List -->
-    <div class="writing">
-      <div class="posts-list h-feed">
-        {{ $posts := where .Site.Pages "Type" "post" }}
-        {{ range $posts }}
-        {{ $urlizedCategories := slice }}
-        {{ range .Params.categories }}
-          {{ $urlizedCategories = $urlizedCategories | append (. | urlize) }}
-        {{ end }}
-        {{ $isMicropost := in .Params.categories "Microposts" }}
-
-        {{ if $isMicropost }}
-        <!-- Micropost style -->
-        <div class="post-item h-entry" data-tags="{{ delimit $urlizedCategories "," }}">
-          <div class="e-content">
-            {{ .Content }}
-          </div>
-          <p class="post-date">
-            <a href="{{ .Permalink }}" class="u-url">&mdash; <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">{{ .Date.Format "2 January 2006" }}</time></a>
-          </p>
-        </div>
+    <div class="h-feed">
+      {{ $posts := where .Site.Pages "Type" "post" }}
+      {{ range $posts }}
+      {{ $urlizedCategories := slice }}
+      {{ range .Params.categories }}
+        {{ $urlizedCategories = $urlizedCategories | append (. | urlize) }}
+      {{ end }}
+      <p class="h-entry" data-tags="{{ delimit $urlizedCategories "," }}">
+        <a href="{{ .Permalink }}" class="u-url"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">{{ .Date.Format "2 January 2006" }}</time></a>:
+        {{ if .Title }}
+          <span class="p-name"><b>{{ .Title }}</b></span>
         {{ else }}
-        <!-- Longform style -->
-        <div class="post-item h-entry" data-tags="{{ delimit $urlizedCategories "," }}">
-          <time class="post-date dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">{{ .Date.Format "2 January 2006" }}</time>
-          <a href="{{ .Permalink }}" class="post-link u-url">
-            {{ if .Title }}
-              <span class="p-name">{{ .Title }}</span>
-            {{ else }}
-              <span class="p-name">{{ .Date.Format "2006-01-02" }}</span>
-            {{ end }}
-          </a>
-          {{ if .Params.summary }}
-          <p class="post-lede p-summary">{{ .Params.summary }}</p>
-          {{ else if .Summary }}
-          <p class="post-lede p-summary">{{ .Summary | truncate 200 }}</p>
-          {{ end }}
-        </div>
+          <span class="p-summary">{{ .Summary | truncate 100 }}</span>
         {{ end }}
-        {{ end }}
-      </div>
+      </p>
+      {{ end }}
     </div>
   </div>
 </div>
@@ -68,7 +44,7 @@
 // Filter posts by category
 document.addEventListener('DOMContentLoaded', function() {
   const pills = document.querySelectorAll('.category-pill');
-  const posts = document.querySelectorAll('.post-item');
+  const posts = document.querySelectorAll('.h-entry');
 
   pills.forEach(pill => {
     pill.addEventListener('click', function(e) {
@@ -83,11 +59,11 @@ document.addEventListener('DOMContentLoaded', function() {
       // Filter posts
       posts.forEach(post => {
         if (category === 'all') {
-          post.style.display = 'flex';
+          post.style.display = 'block';
         } else {
           const postTags = post.dataset.tags.toLowerCase().split(',');
           if (postTags.includes(category)) {
-            post.style.display = 'flex';
+            post.style.display = 'block';
           } else {
             post.style.display = 'none';
           }
