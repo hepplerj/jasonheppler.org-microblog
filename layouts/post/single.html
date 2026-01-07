@@ -9,16 +9,10 @@
         {{ end }}
 
         {{ if .Params.summary }}
-        <p class="post-lede p-summary">{{ .Params.summary }}</p>
+        <p class="post-subtitle p-summary">{{ .Params.summary }}</p>
         {{ else if .Summary }}
-        <p class="post-lede p-summary">{{ .Summary }}</p>
+        <p class="post-subtitle p-summary">{{ .Summary }}</p>
         {{ end }}
-
-        <p class="post-date">
-          <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">
-            {{ .Date.Format "2 January 2006" }}
-          </time>
-        </p>
       </header>
 
       <div class="post-body e-content">
