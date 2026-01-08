@@ -38,7 +38,6 @@
     <!-- Secondary pill navigation - uses Micro.blog menu config -->
     <div class="nav-container" style="padding-top: 0.5rem; padding-bottom: 1rem;">
         <div class="secondary-nav">
-            <a href="https://jasonheppler.org" class="category-pill">← Main Site</a>
             {{ range .Site.Menus.main }}
             <a href="{{ .URL }}" class="category-pill">{{ .Name }}</a>
             {{ end }}
