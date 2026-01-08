@@ -2480,3 +2480,49 @@ aside.publication-purchase hr {
     gap: 0.5rem;
   }
 }
+
+/* Micropost card layout */
+.micropost-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.25rem;
+}
+
+.micropost-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.micropost-title a {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--theme-text);
+}
+
+.micropost-title a:hover {
+  color: var(--theme-links-hover);
+}
+
+.micropost-header .post-date {
+  color: #666;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  margin-left: 1rem;
+}
+
+[data-site-theme="dark"] .micropost-card {
+  border-color: #555;
+}
+
+[data-site-theme="dark"] .micropost-header {
+  border-bottom-color: #555;
+}
+
+[data-site-theme="dark"] .micropost-header .post-date {
+  color: var(--color-light-grey);
+}

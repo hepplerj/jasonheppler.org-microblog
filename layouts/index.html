@@ -36,16 +36,16 @@
       <div class="posts-list h-feed">
         {{ $microposts := where $posts "Params.categories" "intersect" (slice "Microposts") }}
         {{ range first 5 $microposts }}
-        <div class="post-item h-entry" style="border: 1px solid #ddd; padding: 1rem; margin-bottom: 1.5rem;">
-          <div class="micropost-header" style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 0.75rem; margin-bottom: 0.75rem; border-bottom: 1px solid #ddd;">
+        <div class="post-item h-entry micropost-card">
+          <div class="micropost-header">
             <div class="micropost-title">
               {{ if .Title }}
-                <a href="{{ .Permalink }}" class="u-url" style="font-weight: 600; text-decoration: none;">{{ .Title }}</a>
+                <a href="{{ .Permalink }}" class="u-url">{{ .Title }}</a>
               {{ else }}
-                <a href="{{ .Permalink }}" class="u-url" style="font-weight: 600; text-decoration: none;">Micropost</a>
+                <a href="{{ .Permalink }}" class="u-url">Micropost</a>
               {{ end }}
             </div>
-            <time class="post-date dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-0700" }}" style="color: #666; font-size: 0.9rem;">{{ .Date.Format "2 January 2006" }}</time>
+            <time class="post-date dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-0700" }}">{{ .Date.Format "2 January 2006" }}</time>
           </div>
           <div class="e-content">
             {{ .Content }}
