@@ -9,64 +9,50 @@
 </div>
 
 <script>
-// Theme toggle - Mobile
+// Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 const moonIcon = document.getElementById('moonIcon');
 const sunIcon = document.getElementById('sunIcon');
-
-// Theme toggle - Desktop
-const desktopThemeToggle = document.getElementById('desktopThemeToggle');
-const desktopMoonIcon = document.getElementById('desktopMoonIcon');
-const desktopSunIcon = document.getElementById('desktopSunIcon');
 
 const currentTheme = localStorage.getItem('theme') ||
     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
 document.documentElement.setAttribute('data-site-theme', currentTheme);
 
-// Set initial theme icons
 if (currentTheme === 'dark') {
-    moonIcon?.classList.add('hidden');
-    sunIcon?.classList.remove('hidden');
-    desktopMoonIcon?.classList.add('hidden');
-    desktopSunIcon?.classList.remove('hidden');
+    moonIcon.classList.add('hidden');
+    sunIcon.classList.remove('hidden');
 }
 
-// Handle theme toggle
-function toggleTheme() {
+themeToggle?.addEventListener('click', () => {
     const theme = document.documentElement.getAttribute('data-site-theme');
     const newTheme = theme === 'dark' ? 'light' : 'dark';
 
     document.documentElement.setAttribute('data-site-theme', newTheme);
     localStorage.setItem('theme', newTheme);
 
-    moonIcon?.classList.toggle('hidden');
-    sunIcon?.classList.toggle('hidden');
-    desktopMoonIcon?.classList.toggle('hidden');
-    desktopSunIcon?.classList.toggle('hidden');
-}
-
-themeToggle?.addEventListener('click', toggleTheme);
-desktopThemeToggle?.addEventListener('click', toggleTheme);
-
-// Sidebar toggle
-const sidebarToggle = document.getElementById('sidebarToggle');
-const sidebar = document.getElementById('sidebar');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
-const sidebarMenuIcon = document.getElementById('sidebarMenuIcon');
-const sidebarCloseIcon = document.getElementById('sidebarCloseIcon');
-
-sidebarToggle?.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-    sidebarOverlay.classList.toggle('active');
-    sidebarMenuIcon.classList.toggle('hidden');
-    sidebarCloseIcon.classList.toggle('hidden');
+    moonIcon.classList.toggle('hidden');
+    sunIcon.classList.toggle('hidden');
 });
 
-sidebarOverlay?.addEventListener('click', () => {
-    sidebar.classList.remove('active');
-    sidebarOverlay.classList.remove('active');
-    sidebarMenuIcon.classList.remove('hidden');
-    sidebarCloseIcon.classList.add('hidden');
+// Menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const dropdown = document.getElementById('dropdown');
+const overlay = document.getElementById('overlay');
+const menuIcon = document.getElementById('menuIcon');
+const closeIcon = document.getElementById('closeIcon');
+
+menuToggle?.addEventListener('click', () => {
+    dropdown.classList.toggle('active');
+    overlay.classList.toggle('active');
+    menuIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+});
+
+overlay?.addEventListener('click', () => {
+    dropdown.classList.remove('active');
+    overlay.classList.remove('active');
+    menuIcon.classList.remove('hidden');
+    closeIcon.classList.add('hidden');
 });
 </script>
