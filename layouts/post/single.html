@@ -50,6 +50,10 @@
       </p>
     </aside>
 
+      {{ if .Site.Params.include_conversation }}
+      <script type="text/javascript" src="https://micro.blog/conversation.js?url={{ .Permalink }}"></script>
+      {{ end }}
+
     <script>
       page_data = (document.documentElement.outerHTML.length / 1024).toFixed(2);
       document.getElementById("carbon").innerHTML = page_data;
