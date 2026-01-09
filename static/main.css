@@ -161,6 +161,13 @@ mark {
   color: var(--theme-text);
 }
 
+p {
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  -webkit-hyphenate-character: "-";
+}
+
 p,
 ul {
   margin: 1rem 0;
