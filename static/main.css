@@ -363,13 +363,64 @@ nav {
   gap: 0.75rem;
 }
 
-.secondary-nav {
+/* Two-column layout for content with side navigation */
+.content-with-nav {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Sub-navigation sidebar */
+.sub-nav {
+  position: sticky;
+  top: 2rem;
+}
+
+.sub-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  width: 100%;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sub-nav li {
+  margin: 0;
+}
+
+.sub-nav a {
+  color: var(--theme-links);
+  text-decoration: none;
+  font-size: var(--type-small);
+  transition: color 0.2s;
+}
+
+.sub-nav a:hover {
+  color: var(--theme-links-hover);
+  text-decoration: underline;
+}
+
+/* Mobile: move nav to top and display inline */
+@media screen and (max-width: 768px) {
+  .content-with-nav {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .sub-nav {
+    position: static;
+    order: -1;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--theme-text);
+  }
+
+  .sub-nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }
 
 .icon-btn {

@@ -1,7 +1,18 @@
 {{ define "main" }}
 
 <div class="pad2y limiter content">
-  <div class="body">
+  <div class="content-with-nav">
+    <!-- Sub-navigation -->
+    <nav class="sub-nav">
+      <ul>
+        {{ range .Site.Menus.main }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+
+    <!-- Main content -->
+    <div class="body">
     <article class="h-entry">
       <header>
         {{ if .Title }}
@@ -24,7 +35,8 @@
       </footer>
       {{ end }}
     </article>
-  </div>
+    </div> <!-- .body -->
+  </div> <!-- .content-with-nav -->
 </div>
 
 {{ end }}
