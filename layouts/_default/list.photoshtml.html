@@ -1,10 +1,5 @@
 {{ define "main" }}
 
-<div class="pad2y limiter content">
-  <div class="content-with-nav">
-    {{ partial "subnav.html" . }}
-
-    <div class="body">
 	<div class="photos-grid-container" style="display: grid; grid-column-gap: 15px; grid-row-gap: 15px; grid-template-columns: 33% 33% 33%;">
 
 	{{- $list := where .Site.Pages ".Params.photos" "!=" nil -}}
@@ -18,8 +13,5 @@
 	{{ end }}
 
 	</div>
-    </div> <!-- .body -->
-  </div> <!-- .content-with-nav -->
-</div>
 
 {{ end }}

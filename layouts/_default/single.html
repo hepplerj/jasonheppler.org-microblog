@@ -1,11 +1,7 @@
 {{ define "main" }}
 
 <div class="pad2y limiter content">
-  <div class="content-with-nav">
-    {{ partial "subnav.html" . }}
-
-    <!-- Main content -->
-    <div class="body">
+  <div class="body">
     <article class="h-entry">
       <header>
         {{ if .Title }}
@@ -28,8 +24,7 @@
       </footer>
       {{ end }}
     </article>
-    </div> <!-- .body -->
-  </div> <!-- .content-with-nav -->
+  </div>
 </div>
 
 {{ end }}
