@@ -2,14 +2,7 @@
 
 <div class="pad2y limiter content">
   <div class="content-with-nav">
-    <!-- Sub-navigation -->
-    <nav class="sub-nav">
-      <ul>
-        {{ range .Site.Menus.main }}
-        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
-    </nav>
+    {{ partial "subnav.html" . }}
 
     <!-- Main content -->
     <div class="body">
