@@ -1317,7 +1317,7 @@ footer p {
   margin: 0 auto;
 }
 
-.post-body .opening img {
+.post-body img.opening {
   width: 100%;
   height: auto;
   margin-top: 2em;
