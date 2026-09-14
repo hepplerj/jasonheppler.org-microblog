@@ -1,9 +1,4 @@
 {{ define "main" }}
-<header class="lm-archive-head">
-  <h1 class="lm-archive-title">{{ .Site.Title }}</h1>
-  <p class="lm-archive-lead">{{ .Site.Params.about_me | default (.Site.Params.description | safeHTML) }}</p>
-</header>
-
 {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") 10 }}
 <div class="lm-mb-list h-feed">
   {{ range $paginator.Pages }}{{ partial "post-card.html" . }}{{ end }}
