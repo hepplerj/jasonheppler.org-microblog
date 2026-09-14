@@ -1,0 +1,67 @@
+<header class="lm-archive-head">
+  <h1 class="lm-archive-title">Archive</h1>
+  <p class="lm-archive-lead">Everything posted here, newest first. Filter by category or search titles.</p>
+</header>
+
+{{ $posts := (where .Site.RegularPages "Type" "post").ByDate.Reverse }}
+{{ $cats := slice }}
+{{ range $posts }}{{ range .Params.categories }}{{ $cats = $cats | append . }}{{ end }}{{ end }}
+
+<div class="lm-archive-controls">
+  <div class="lm-chips" id="lmChips">
+    <button class="lm-chip on" data-filter="all">All <span class="lm-chip-n">{{ len $posts }}</span></button>
+    {{ range $cats | uniq | sort }}
+    <button class="lm-chip" data-filter="{{ . | urlize }}">{{ . }}</button>
+    {{ end }}
+  </div>
+  <input type="search" class="lm-search" id="lmSearch" placeholder="Search titles…" aria-label="Search posts">
+</div>
+
+<p class="lm-archive-count" id="lmResultCount"></p>
+
+<div class="lm-archive-list h-feed">
+  {{ range $posts }}
+  {{ $slugs := slice }}{{ range .Params.categories }}{{ $slugs = $slugs | append (. | urlize) }}{{ end }}
+  {{ $title := .Title | default (trim (.Summary | plainify | truncate 90) " \n") }}
+  <a href="{{ .Permalink }}" class="lm-archive-row h-entry u-url" data-cats="{{ delimit $slugs "," }}" data-title="{{ $title | lower }}">
+    <span class="lm-archive-row-title p-name">{{ $title }}</span>
+    <span class="lm-archive-row-meta">
+      <time class="lm-archive-date dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+    </span>
+  </a>
+  {{ end }}
+</div>
+
+<p class="lm-archive-empty" id="lmArchiveEmpty" style="display:none">No posts match your search.</p>
+
+<script>
+  (function () {
+    var chips = document.querySelectorAll('#lmChips .lm-chip');
+    var search = document.getElementById('lmSearch');
+    var rows = document.querySelectorAll('.lm-archive-row');
+    var resultCount = document.getElementById('lmResultCount');
+    var empty = document.getElementById('lmArchiveEmpty');
+    var filter = 'all', query = '';
+    function update() {
+      var visible = 0, q = query.toLowerCase();
+      rows.forEach(function (row) {
+        var cats = row.dataset.cats.split(',');
+        var show = (filter === 'all' || cats.indexOf(filter) !== -1) && (!q || row.dataset.title.indexOf(q) !== -1);
+        row.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      resultCount.textContent = visible + ' post' + (visible !== 1 ? 's' : '');
+      empty.style.display = visible === 0 ? '' : 'none';
+    }
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('on'); });
+        chip.classList.add('on');
+        filter = chip.dataset.filter;
+        update();
+      });
+    });
+    search.addEventListener('input', function () { query = search.value; update(); });
+    update();
+  })();
+</script>

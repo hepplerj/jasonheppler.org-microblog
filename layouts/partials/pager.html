@@ -1,0 +1,7 @@
+{{ if gt .TotalPages 1 }}
+<nav class="lm-pager" aria-label="Pages">
+  {{ if .HasPrev }}<a href="{{ .Prev.URL }}" class="lm-pager-link">&larr; Newer</a>{{ else }}<span class="lm-pager-link lm-pager-off">&larr; Newer</span>{{ end }}
+  <span class="lm-pager-count">{{ .PageNumber }} / {{ .TotalPages }}</span>
+  {{ if .HasNext }}<a href="{{ .Next.URL }}" class="lm-pager-link">Older &rarr;</a>{{ else }}<span class="lm-pager-link lm-pager-off">Older &rarr;</span>{{ end }}
+</nav>
+{{ end }}
