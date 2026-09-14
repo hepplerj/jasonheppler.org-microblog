@@ -1,24 +1,10 @@
 {{ define "main" }}
-{{ $long := in .Params.categories "Longform" }}
 <article class="lm-article h-entry">
   <header class="lm-article-head">
-    {{ if $long }}
-    <p class="lm-label">Essay</p>
-    <h1 class="lm-article-title p-name">{{ .Title }}</h1>
-    {{ with .Params.summary }}<p class="lm-article-lede p-summary">{{ . }}</p>{{ end }}
-    <div class="lm-article-meta">
-      <a href="{{ .Permalink }}" class="u-url"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "January 2, 2006" }}</time></a>
-      <span class="lm-dot-sep">·</span>
-      <span class="p-author">Jason A. Heppler</span>
-      <span class="lm-dot-sep">·</span>
-      <span>{{ .ReadingTime }} min read</span>
-    </div>
-    {{ else }}
     <div class="lm-mb-single-head">
       {{ if .Title }}<h1 class="lm-article-title p-name">{{ .Title }}</h1>{{ else }}<span></span>{{ end }}
       <a href="{{ .Permalink }}" class="lm-mb-date u-url"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "January 2, 2006" }}</time></a>
     </div>
-    {{ end }}
   </header>
 
   <div class="lm-prose e-content">
