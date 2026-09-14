@@ -2320,3 +2320,7 @@ mark {
 .lm-mb-tags .lm-mb-date { color: var(--muted); }
 /* Home stream has no intro header; clear the absolutely positioned masthead. */
 #main-content > .lm-mb-list:first-child { margin-top: 72px; }
+/* Photos plug-in grid: uniform square tiles. */
+.photos-grid-container { grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
+.photos-grid-container img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 3px; display: block; }
+@media (max-width: 520px) { .photos-grid-container { grid-template-columns: repeat(2, 1fr) !important; } }
