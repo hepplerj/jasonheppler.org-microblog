@@ -1,10 +1,7 @@
 {{/* One post in a stream. Longform: title + summary + read-more. Micropost: full content. */}}
 {{ $long := in .Params.categories "Longform" }}
 <article class="lm-mb-post h-entry">
-  <header class="lm-mb-head">
-    {{ if .Title }}<h2 class="lm-mb-title p-name"><a href="{{ .Permalink }}" class="u-url">{{ .Title }}</a></h2>{{ else }}<span></span>{{ end }}
-    <a href="{{ .Permalink }}" class="lm-mb-date u-url"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "Jan 2, 2006" }}</time></a>
-  </header>
+  {{ if .Title }}<h2 class="lm-mb-title p-name"><a href="{{ .Permalink }}" class="u-url">{{ .Title }}</a></h2>{{ end }}
   <div class="lm-mb-body lm-prose {{ if $long }}p-summary{{ else }}e-content{{ end }}">
     {{ if $long }}
     <p>{{ .Params.summary | default (.Summary | plainify | truncate 240) }}</p>
@@ -13,7 +10,7 @@
     {{ .Content }}
     {{ end }}
   </div>
-  {{ with .Params.categories }}
-  <p class="lm-mb-tags">{{ range $i, $c := . }}{{ if $i }}<span class="lm-dot-sep">·</span>{{ end }}<a href="/categories/{{ $c | urlize }}/">{{ $c }}</a>{{ end }}</p>
-  {{ end }}
+  <p class="lm-mb-tags">
+    <a href="{{ .Permalink }}" class="lm-mb-date u-url"><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "Jan 2, 2006" }}</time></a>{{ range .Params.categories }}<span class="lm-dot-sep">·</span><a href="/categories/{{ . | urlize }}/">{{ . }}</a>{{ end }}
+  </p>
 </article>
