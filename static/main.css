@@ -2305,3 +2305,8 @@ mark {
 @media (max-width: 520px) { .lm-photo-grid { grid-template-columns: repeat(2, 1fr); } }
 .lm-mb-body img { max-width: 100%; height: auto; border-radius: 3px; }
 .lm-nav a[href^="http"]::after { content: " ↗"; font-size: 0.75em; opacity: 0.6; }
+/* Micro.blog bookshelf/book-post covers are floated <img align="left">; drop the prose image margin so cover and title align. */
+.lm-prose img[align="left"], .lm-prose img[align="right"] { margin: 0; }
+.lm-prose .bookshelf_book { display: flow-root; margin: 0 0 1.25em; }
+/* The Photos plug-in renders its grid with no page header, so clear the absolutely positioned masthead. */
+#main-content > .photos-grid-container { margin-top: 64px; }
