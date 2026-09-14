@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
-    {{ partial "head.html" . }}
+  {{ partial "head.html" . }}
 </head>
 <body>
-    {{ partial "header.html" . }}
+  <a class="lm-skip-link" href="#main-content">Skip to content</a>
+  {{ partial "header.html" . }}
+  <main class="lm-wrap" id="main-content">
     {{ block "main" . }}{{ end }}
+  </main>
+  <div class="lm-wrap">
     {{ partial "footer.html" . }}
-    {{ partial "custom_footer.html" . }}
+  </div>
+  {{ partial "custom_footer.html" . }}
 </body>
 </html>

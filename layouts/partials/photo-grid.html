@@ -1,0 +1,8 @@
+<header class="lm-archive-head">
+  <h1 class="lm-archive-title">Photos</h1>
+</header>
+<div class="lm-photo-grid">
+  {{ range where .Site.Pages ".Params.photos" "!=" nil }}
+  <a href="{{ .Permalink }}">{{ range first 1 .Params.photos }}<img src="{{ . }}" width="300" height="300" loading="lazy" alt="">{{ end }}</a>
+  {{ end }}
+</div>

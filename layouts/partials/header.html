@@ -1,49 +1,43 @@
-<nav>
-    <div class="nav-container">
-        <div class="site-title"><a href="https://jasonheppler.org">{{ .Site.Title }}</a></div>
-
-        <div class="nav-right">
-            <span class="about-text"><a href="/about/">About</a></span>
-
-            <button class="icon-btn theme-btn" id="themeToggle" aria-label="Toggle theme">
-                <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 244 255" role="presentation">
-                    <path fill="currentColor" fill-rule="evenodd" d="M3.6 98.7a127 127 0 0 1 182-84.3 102 102 0 1 0 58.5 163A127 127 0 0 1 3.6 98.6z"></path>
-                </svg>
-                <svg id="sunIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 254 254" role="presentation">
-                    <g fill="currentColor" fill-rule="evenodd">
-                        <circle cx="127" cy="127" r="45"></circle>
-                        <path d="M118 209v-.3a9 9 0 0 1 18 .3v36a9 9 0 1 1-18 0v-36zM118 9v-.3a9 9 0 0 1 18 .3v36a9 9 0 1 1-18 0V9zM178.6 191.3l-.2-.1a9 9 0 0 1 13-12.6l25.4 25.5a9 9 0 1 1-12.7 12.7l-25.5-25.5zM37.2 50l-.2-.3a9 9 0 0 1 13-12.5l25.4 25.5a9 9 0 0 1-12.7 12.7L37.2 49.9zM209 136h-.3a9 9 0 0 1 .3-18h36a9 9 0 1 1 0 18h-36zM9 136h-.3a9 9 0 0 1 .3-18h36a9 9 0 1 1 0 18H9zM191.3 75.4l-.1.2a9 9 0 0 1-12.6-13l25.5-25.4a9 9 0 1 1 12.7 12.7l-25.5 25.5zM50 216.8l-.3.2a9 9 0 0 1-12.5-13l25.5-25.4a9 9 0 1 1 12.7 12.7l-25.5 25.5z"></path>
-                    </g>
-                </svg>
-            </button>
-
-            <div class="menu-container">
-                <button class="icon-btn" id="menuToggle" aria-label="Toggle menu">
-                    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <svg id="closeIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-
-                <div class="dropdown" id="dropdown">
-                    <a href="https://jasonheppler.org/publications/">Publications</a>
-                    <a href="https://jasonheppler.org/research/">Digital History</a>
-                    <a href="https://jasonheppler.org/courses/">Teaching</a>
-                    <a href="https://writing.jasonheppler.org/">Blog</a>
-                    <a href="https://www.tackandink.org/">Newsletter</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Secondary pill navigation - uses Micro.blog menu config -->
-        <div class="secondary-nav">
-            {{ range .Site.Menus.main }}
-            <a href="{{ .URL }}" class="category-pill">{{ .Name }}</a>
-            {{ end }}
-        </div>
-    </div>
-</nav>
-
-<div class="overlay" id="overlay"></div>
+<header class="lm-topbar">
+  <a href="/" class="lm-mark" aria-label="{{ .Site.Title }}, home">
+    <svg class="lm-brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="120" cy="120" r="112"/>
+        <path d="M92 60 L92 160 Q92 185 65 179"/>
+        <line x1="152" y1="60" x2="152" y2="153"/>
+        <line x1="92" y1="103" x2="152" y2="103"/>
+      </g>
+    </svg>
+    <span>{{ .Site.Title }}</span>
+  </a>
+  <div class="lm-topbar-actions">
+    <button class="lm-nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="lmNav">
+      <span>Menu</span>
+    </button>
+  </div>
+  <nav class="lm-nav" id="lmNav">
+    {{ range .Site.Menus.main }}
+    <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="lm-nav-active"{{ end }}>{{ .Name }}</a>
+    {{ end }}
+    <a href="https://jasonheppler.org/about/">About</a>
+    <a href="https://jasonheppler.org/publications/">Books</a>
+    <a href="https://jasonheppler.org/academic-writing/">Academic Writing</a>
+    <a href="https://jasonheppler.org/public-writing/">Public Writing</a>
+    <a href="https://jasonheppler.org/research/">Digital History</a>
+    <a href="https://jasonheppler.org/books/">Bookshelf</a>
+    <button class="lm-theme" type="button" aria-label="Switch color theme (auto, light, dark)" title="Theme">
+      <svg class="lm-ic-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 3 A9 9 0 0 0 12 21 Z" fill="currentColor" stroke="none"/>
+      </svg>
+      <svg class="lm-ic-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+      <svg class="lm-ic-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 14.5A8 8 0 1 1 9.5 4 6.3 6.3 0 0 0 20 14.5Z"/>
+      </svg>
+      <span>Theme</span>
+    </button>
+  </nav>
+</header>

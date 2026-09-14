@@ -1,3 +1,10 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title | default (.Date.Format "January 2, 2006") }} · {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ if .Description }}{{ .Description }}{{ else if .IsPage }}{{ .Summary | plainify | truncate 160 }}{{ else }}{{ .Site.Params.description | plainify }}{{ end }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="home" href="https://jasonheppler.org">
+
 {{ partial "microblog_head.html" . }}
 
 <!-- Privacy-friendly analytics by Plausible -->
@@ -7,3 +14,12 @@
   plausible.init()
 </script>
 
+<!-- Flash-free theme (light / dark / auto) -->
+<script>
+  (function () {
+    var mode = localStorage.getItem('lm-theme-mode') || 'auto';
+    var root = document.documentElement;
+    root.setAttribute('data-mode', mode);
+    if (mode === 'light' || mode === 'dark') root.setAttribute('data-theme', mode);
+  })();
+</script>
