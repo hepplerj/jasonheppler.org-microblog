@@ -1494,11 +1494,10 @@ a {
 }
 
 .lm-mb-tags {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--muted);
   margin: 16px 0 0;
   padding-top: 14px;
-  border-top: 1px solid var(--hair);
 }
 
 .lm-mb-tags a {
@@ -4797,6 +4796,7 @@ a.ba-index-item .ba-index-date {
 }
 
 @media (max-width: 720px) {
+
   .ba-gg-split,
   .ba-gg-split--flip {
     flex-direction: column;
