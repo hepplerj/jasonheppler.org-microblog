@@ -5142,3 +5142,16 @@ summary:focus-visible {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
+
+/* Stream posts: no card box, just a hairline between posts. */
+.lm-mb-post,
+.lm-mb-post:hover {
+  border: 0;
+  border-radius: 0;
+  padding: 0 0 32px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.lm-mb-post:last-child {
+  border-bottom: 0;
+}
