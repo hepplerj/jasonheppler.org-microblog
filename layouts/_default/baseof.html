@@ -3,15 +3,13 @@
 <head>
   {{ partial "head.html" . }}
 </head>
-<body>
+<body class="bf bf-inner">
   <a class="lm-skip-link" href="#main-content">Skip to content</a>
   {{ partial "header.html" . }}
-  <main class="lm-wrap" id="main-content">
+  <main class="sb-main" id="main-content">
     {{ block "main" . }}{{ end }}
   </main>
-  <div class="lm-wrap">
-    {{ partial "footer.html" . }}
-  </div>
+  {{ partial "footer.html" . }}
   {{ partial "custom_footer.html" . }}
 </body>
 </html>
