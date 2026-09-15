@@ -1,6 +1,6 @@
-<header class="lm-topbar">
-  <a href="/" class="lm-mark" aria-label="{{ .Site.Title }}, home">
-    <svg class="lm-brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" aria-hidden="true">
+<header class="bf-header">
+  <a href="/" class="bf-wordmark" aria-label="{{ .Site.Title }}, home">
+    <svg class="bf-brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" aria-hidden="true">
       <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="120" cy="120" r="112"/>
         <path d="M92 60 L92 160 Q92 185 65 179"/>
@@ -8,16 +8,18 @@
         <line x1="92" y1="103" x2="152" y2="103"/>
       </g>
     </svg>
-    <span>{{ .Site.Title }}</span>
+    <span class="bf-wordmark-name">{{ .Site.Title }}</span>
   </a>
-  <div class="lm-topbar-actions">
-    <button class="lm-nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="lmNav">
-      <span>Menu</span>
-    </button>
-  </div>
-  <nav class="lm-nav" id="lmNav">
+  <button class="bf-nav-toggle lm-nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="lmNav">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+  <nav class="bf-nav" id="lmNav">
     {{ range .Site.Menus.main }}
-    <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="lm-nav-active"{{ end }}>{{ .Name }}</a>
+    <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="bf-nav-active"{{ end }}>{{ .Name }}</a>
     {{ end }}
     <a href="https://jasonheppler.org/">Back home</a>
     <button class="lm-theme" type="button" aria-label="Switch color theme (auto, light, dark)" title="Theme">
@@ -32,7 +34,6 @@
       <svg class="lm-ic-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M20 14.5A8 8 0 1 1 9.5 4 6.3 6.3 0 0 0 20 14.5Z"/>
       </svg>
-      <span>Theme</span>
     </button>
   </nav>
 </header>

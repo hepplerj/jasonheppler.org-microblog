@@ -1,9 +1,8 @@
-<footer class="lm-footer">
-  <div>
-    © 2008&ndash;{{ now.Format "2006" }} <a href="https://jasonheppler.org">Jason A. Heppler</a>. My writing, photography, and the design of this website are <a href="https://www.copyright.gov/help/faq/faq-general.html#mywork">copyrighted</a>. Feel free to ask if you want to reuse any content beyond the bounds of fair use. Powered by <a href="https://micro.blog/">Micro.blog</a> and <a href="https://www.ahillofbeans.com/">coffee</a>. <a href="https://maggieappleton.com/ai-dark-forest">Nothing here is AI-generated</a>. Made in Nebraska. This site is <a href="https://jasonheppler.org/low-impact/">climate&#8209;friendly</a>.
-  </div>
-  <div class="lm-foot-rss">
-    <a href="/feed.xml">RSS</a>
-    <a href="/feed.json">JSON</a>
-  </div>
+<footer class="bf-footer">
+  <nav class="ba-foot-nav" aria-label="Footer">
+    {{ range .Site.Menus.main }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}
+    <a href="https://jasonheppler.org/">Back home</a>
+  </nav>
+  <p class="ba-foot-news">My writing, photography, and the design of this website are <a href="https://www.copyright.gov/help/faq/faq-general.html#mywork">copyrighted</a>. Feel free to ask if you want to reuse any content beyond the bounds of fair use. <a href="https://maggieappleton.com/ai-dark-forest">Nothing here is AI-generated</a>. This site is <a href="https://jasonheppler.org/low-impact/">climate&#8209;friendly</a>.</p>
+  <p class="bf-colophon">© 2008–{{ now.Format "2006" }} <a href="https://jasonheppler.org">Jason A. Heppler</a> · Powered by <a href="https://micro.blog/">Micro.blog</a> and <a href="https://www.ahillofbeans.com/">coffee</a> · Made in Nebraska · <a href="/feed.xml">RSS</a> · <a href="/feed.json">JSON</a></p>
 </footer>
