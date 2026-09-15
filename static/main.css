@@ -1,63 +1,6 @@
 /* Paper — a system-font, Flexoki theme for jasonheppler.org.
    The inherited lm- class prefix keeps the complete Pine template set portable. */
 
-:root {
-  --paper: #f2f3f1;
-  --ink: #22251f;
-  --pine: #2f5d50;
-  --pine-deep: #244a40;
-  --muted: #5a615a;
-  --hair: rgba(34, 37, 31, 0.12);
-  --accent-line: rgba(47, 93, 80, 0.35);
-  --accent-glow: rgba(47, 93, 80, 0.15);
-  --field-bg: #ffffff;
-  --btn-ink: #ffffff;
-  --cover-shadow: rgba(34, 37, 31, 0.10);
-  --cover-shadow-h: rgba(34, 37, 31, 0.16);
-  --panel-green: #244a40;
-  /* constant in both themes — always pairs with white text */
-
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-
-  --col: 760px;
-}
-
-/* Dark — applied for system-dark (unless forced light) or when forced dark */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #181a19;
-    --ink: #e7e9e4;
-    --pine: #7eb39f;
-    --pine-deep: #93c2af;
-    --muted: var(--ink);
-    /*;#9aa099;*/
-    --hair: rgba(231, 233, 228, 0.14);
-    --accent-line: rgba(126, 179, 159, 0.40);
-    --accent-glow: rgba(126, 179, 159, 0.22);
-    --field-bg: #232624;
-    --btn-ink: #161817;
-    --cover-shadow: rgba(0, 0, 0, 0.40);
-    --cover-shadow-h: rgba(0, 0, 0, 0.55);
-  }
-}
-
-:root[data-theme="dark"] {
-  --paper: #181a19;
-  --ink: #e7e9e4;
-  --pine: #7eb39f;
-  --pine-deep: #93c2af;
-  --muted: var(--ink);
-  /*#9aa099;*/
-  --hair: rgba(231, 233, 228, 0.14);
-  --accent-line: rgba(126, 179, 159, 0.40);
-  --accent-glow: rgba(126, 179, 159, 0.22);
-  --field-bg: #232624;
-  --btn-ink: #161817;
-  --cover-shadow: rgba(0, 0, 0, 0.40);
-  --cover-shadow-h: rgba(0, 0, 0, 0.55);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -71,7 +14,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.6;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -87,6 +30,9 @@ a {
   max-width: var(--col);
   margin: 0 auto;
   padding: 0 24px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 24px;
 }
 
 /* ---- Top bar ---- */
@@ -95,32 +41,51 @@ a {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: 16px 24px;
-  padding: 32px 0 0;
+  gap: 20px;
+  padding: 14px 24px;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  max-width: var(--col);
+  transform: translateX(-50%);
 }
 
 .lm-mark {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
   transition: color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .lm-mark:hover {
-  color: var(--pine);
+  color: var(--ink);
 }
 
 .lm-nav {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
   gap: 10px 20px;
   font-size: 16px;
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  width: min(210px, calc(100vw - 40px));
+  border-radius: 4px;
+  background: var(--paper);
+  box-shadow: 0 12px 32px rgb(16 15 15 / 0.12);
 }
 
 .lm-nav a {
@@ -147,8 +112,12 @@ a {
   margin: 0;
   cursor: pointer;
   color: var(--ink);
-  line-height: 0;
+  line-height: 1;
   transition: color 0.15s ease;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .lm-nav-toggle:hover {
@@ -160,16 +129,13 @@ a {
 }
 
 @media (max-width: 680px) {
-  .lm-topbar {
-    flex-wrap: wrap;
-  }
+  
 
   .lm-nav-toggle {
     display: inline-flex;
   }
 
   .lm-nav {
-    display: none;
     flex-basis: 100%;
     flex-direction: column;
     align-items: flex-start;
@@ -208,6 +174,8 @@ a {
   align-items: center;
   line-height: 0;
   transition: color 0.15s ease;
+  margin-top: 5px;
+  border-top: 1px solid var(--hair);
 }
 
 .lm-theme:hover {
@@ -229,7 +197,7 @@ a {
 
 /* ---- Intro (statement-first) ---- */
 .lm-intro {
-  padding: 80px 0 8px;
+  padding: 64px 0 0;
 }
 
 .lm-intro-statement {
@@ -291,10 +259,10 @@ a {
 }
 
 .lm-bio {
-  font-size: 19px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--ink);
-  margin: 0 0 22px;
+  margin: 0;
 }
 
 .lm-bio a {
@@ -310,9 +278,9 @@ a {
 .lm-social {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 18px;
-  font-size: 15px;
-  color: var(--muted);
+  gap: 4px 0;
+  font-size: 16px;
+  color: var(--ink);
 }
 
 .lm-social a {
@@ -328,53 +296,68 @@ a {
 
 /* ---- Sections ---- */
 .lm-section {
-  padding: 56px 0 0;
+  padding: 24px 0 0;
 }
 
 .lm-label {
-  font-family: var(--mono);
-  letter-spacing: 0.08em;
+  font-family: var(--sans);
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 0 0 22px;
+  margin: 0 0 12px;
+  padding: 0 0 6px;
+  border-bottom: 1px solid var(--hair);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
 }
 
 /* ---- Writing stream ---- */
 .lm-stream {
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
 .lm-row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 20px;
-  padding: 13px 0;
+  gap: 18px;
+  padding: 0;
   border-top: 1px solid var(--hair);
   text-decoration: none;
+  min-height: 26px;
+  border: 0;
+  line-height: 1.6;
 }
 
 .lm-row:last-child {
   border-bottom: 1px solid var(--hair);
+  border: 0;
 }
 
 .lm-row-title {
-  color: var(--ink);
-  font-size: 18px;
+  color: var(--pine);
+  font-size: 16px;
   transition: color 0.15s ease;
+  overflow: hidden;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lm-row:hover .lm-row-title {
-  color: var(--pine);
+  color: var(--pine-deep);
 }
 
 .lm-row-date {
-  font-family: var(--mono);
-  font-size: 13px;
+  font-family: var(--sans);
+  font-size: 16px;
   color: var(--muted);
   white-space: nowrap;
   flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---- Books ---- */
@@ -451,10 +434,16 @@ a {
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
+  margin: 0 0 12px;
+  padding: 0 0 6px;
+  border-bottom: 1px solid var(--hair);
 }
 
 .lm-section-head .lm-label {
   margin-bottom: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 .lm-section-link {
@@ -470,10 +459,11 @@ a {
 }
 
 .lm-section-sub {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--muted);
-  margin: 14px 0 22px;
+  margin: -2px 0 12px;
   max-width: 56ch;
+  line-height: 1.55;
 }
 
 /* ---- Featured callout ---- */
@@ -893,10 +883,10 @@ a {
 }
 
 .lm-project-title {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
-  color: var(--ink);
-  line-height: 1.3;
+  color: var(--pine);
+  line-height: 1.4;
 }
 
 .lm-project-arrow {
@@ -1032,7 +1022,7 @@ a {
   font-size: 14px;
   color: var(--muted);
   text-decoration: none;
-  margin: 8px 0 28px;
+  margin: 64px 0 24px;
 }
 
 .lm-breadcrumb:hover {
@@ -1558,7 +1548,7 @@ a {
 .lm-mb-list {
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 32px;
   margin: 36px 0 0;
 }
 
@@ -1587,7 +1577,7 @@ a {
   font-size: 20px;
   font-weight: 600;
   line-height: 1.25;
-  margin: 0;
+  margin: 0 0 12px;
 }
 
 .lm-mb-title a {
@@ -1631,8 +1621,9 @@ a {
   font-size: 14px;
   color: var(--muted);
   margin: 16px 0 0;
-  padding-top: 14px;
-  border-top: 1px solid var(--hair);
+  padding-top: 0;
+  border-top: 0;
+  margin-top: 14px;
 }
 
 .lm-mb-tags a {
@@ -1699,6 +1690,8 @@ a {
 /* ---- Newsletter ---- */
 .lm-news {
   padding: 64px 0 0;
+  margin-top: 48px;
+  padding-top: 0;
 }
 
 .lm-news p {
@@ -1720,8 +1713,9 @@ a {
   padding: 11px 14px;
   border: 1px solid var(--hair);
   border-radius: 7px;
-  background: var(--field-bg);
+  background: transparent;
   color: var(--ink);
+  border-color: var(--hair);
 }
 
 .lm-form input:focus {
@@ -1748,17 +1742,18 @@ a {
 
 /* ---- Footer ---- */
 .lm-footer {
-  margin-top: 80px;
-  padding: 28px 0 56px;
+  margin-top: 48px;
+  padding: 18px 0 40px;
   border-top: 1px solid var(--hair);
-  font-family: var(--mono);
-  font-size: 13px;
-  line-height: 1.7;
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.55;
   color: var(--muted);
   display: flex;
   flex-wrap: wrap;
   gap: 6px 18px;
   justify-content: space-between;
+  border-color: var(--hair);
 }
 
 .lm-footer a {
@@ -1777,7 +1772,7 @@ a {
 
 /* ---- Post / article ---- */
 .lm-article-head {
-  padding: 72px 0 0;
+  padding: 64px 0 0;
 }
 
 .lm-article-title {
@@ -1798,10 +1793,10 @@ a {
 .lm-article-meta {
   display: flex;
   align-items: center;
-  font-family: var(--mono);
-  font-size: 13px;
+  font-family: var(--sans);
+  font-size: 14px;
   color: var(--muted);
-  margin: 24px 0 0;
+  margin: 2px 0 0;
 }
 
 .lm-dot-sep {
@@ -1811,6 +1806,7 @@ a {
 
 .lm-article-lead {
   margin: 44px 0 0;
+  margin-top: 24px;
 }
 
 .lm-article-lead img {
@@ -1822,9 +1818,9 @@ a {
 
 /* Prose */
 .lm-prose {
-  margin: 44px 0 0;
-  font-size: 19px;
-  line-height: 1.72;
+  margin: 24px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--ink);
 }
 
@@ -1833,7 +1829,7 @@ a {
 }
 
 .lm-prose p {
-  margin: 0 0 1.3em;
+  margin: 0 0 1em;
 }
 
 .lm-prose a {
@@ -1847,18 +1843,18 @@ a {
 }
 
 .lm-prose h2 {
-  font-size: 26px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.35;
   letter-spacing: -0.01em;
-  margin: 1.7em 0 0.5em;
+  margin: 2em 0 0.7em;
 }
 
 .lm-prose h3 {
-  font-size: 21px;
+  font-size: 16px;
   font-weight: 600;
-  line-height: 1.25;
-  margin: 1.6em 0 0.4em;
+  line-height: 1.4;
+  margin: 1.8em 0 0.65em;
 }
 
 .lm-prose ul,
@@ -1872,11 +1868,12 @@ a {
 }
 
 .lm-prose blockquote {
-  margin: 1.6em 0;
+  margin: 1.5em 0;
   padding: 2px 0 2px 20px;
-  border-left: 2px solid var(--pine);
+  border-left: 2px solid var(--hair);
   color: var(--muted);
   font-style: italic;
+  padding-left: 16px;
 }
 
 .lm-prose blockquote p:last-child {
@@ -1895,7 +1892,7 @@ a {
 .lm-prose pre {
   background: var(--field-bg);
   border: 1px solid var(--hair);
-  border-radius: 8px;
+  border-radius: 3px;
   padding: 16px 18px;
   overflow-x: auto;
   margin: 1.5em 0;
@@ -2312,7 +2309,7 @@ a {
 
 /* ---- Archive / list ---- */
 .lm-archive-head {
-  padding: 72px 0 0;
+  padding: 64px 0 18px;
 }
 
 .lm-archive-title {
@@ -2337,7 +2334,9 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  margin: 40px 0 0;
+  margin: 8px 0 12px;
+  padding: 8px 0;
+  border-block: 1px solid var(--hair);
 }
 
 .lm-chips {
@@ -2392,8 +2391,8 @@ a {
 }
 
 .lm-archive-count {
-  font-family: var(--mono);
-  font-size: 12px;
+  font-family: var(--sans);
+  font-size: 13px;
   color: var(--muted);
   margin: 22px 0 0;
 }
@@ -2402,31 +2401,37 @@ a {
   margin: 10px 0 0;
   display: flex;
   flex-direction: column;
+  margin-top: 0;
 }
 
 .lm-archive-row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 20px;
-  padding: 14px 0;
+  gap: 18px;
+  padding: 0;
   border-top: 1px solid var(--hair);
   text-decoration: none;
+  min-height: 27px;
+  border: 0;
+  line-height: 1.6;
 }
 
 .lm-archive-row:last-child {
   border-bottom: 1px solid var(--hair);
+  border: 0;
 }
 
 .lm-archive-row-title {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.35;
-  color: var(--ink);
+  color: var(--pine);
   transition: color 0.15s ease;
+  font-weight: 400;
 }
 
 .lm-archive-row:hover .lm-archive-row-title {
-  color: var(--pine);
+  color: var(--pine-deep);
 }
 
 .lm-archive-row-source {
@@ -2438,7 +2443,7 @@ a {
 .lm-archive-row-meta {
   display: flex;
   align-items: baseline;
-  gap: 14px;
+  gap: 10px;
   flex-shrink: 0;
 }
 
@@ -2470,12 +2475,10 @@ a {
 /* ---- Responsive ---- */
 @media (max-width: 600px) {
   body {
-    font-size: 17px;
+    font-size: 16px;
   }
 
-  .lm-intro {
-    padding: 56px 0 8px;
-  }
+  
 
   .lm-intro-statement {
     font-size: 30px;
@@ -2485,7 +2488,7 @@ a {
 
   .lm-intro-meta {
     gap: 18px;
-    padding-top: 20px;
+    padding-top: 0;
   }
 
   .lm-portrait img {
@@ -2497,9 +2500,7 @@ a {
     font-size: 10px;
   }
 
-  .lm-bio {
-    font-size: 17px;
-  }
+  
 
   .lm-book-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2610,9 +2611,7 @@ a {
     columns: 2;
   }
 
-  .lm-article-head {
-    padding: 48px 0 0;
-  }
+  
 
   .lm-article-title {
     font-size: 30px;
@@ -2622,16 +2621,14 @@ a {
     font-size: 18px;
   }
 
-  .lm-prose {
+  
+
+  .lm-prose h2 {
     font-size: 18px;
   }
 
-  .lm-prose h2 {
-    font-size: 23px;
-  }
-
   .lm-prose h3 {
-    font-size: 19px;
+    font-size: 16px;
   }
 
   .lm-author-profile {
@@ -2669,9 +2666,7 @@ a {
     border-bottom: 1px solid var(--hair);
   }
 
-  .lm-archive-head {
-    padding: 48px 0 0;
-  }
+  
 
   .lm-archive-title {
     font-size: 28px;
@@ -2688,7 +2683,7 @@ a {
 
   .lm-archive-row {
     flex-wrap: wrap;
-    gap: 4px 16px;
+    align-items: flex-start;
   }
 }
 
@@ -2733,12 +2728,13 @@ a {
 
 .fast-search-box {
   width: 90%;
-  max-width: 540px;
-  background: var(--field-bg);
+  max-width: 600px;
+  background: var(--paper);
   border: 1px solid var(--hair);
-  border-radius: 10px;
+  border-radius: 4px;
   box-shadow: 0 20px 60px rgb(0 0 0 / 0.22);
   overflow: hidden;
+  border-color: var(--hair);
 }
 
 #searchInput {
@@ -2811,7 +2807,7 @@ a {
 
 #searchResults .meta {
   display: block;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11px;
   color: var(--muted);
   text-transform: uppercase;
@@ -2850,7 +2846,10 @@ a {
 }
 
 /* ========================================================================== */
-/* Paper treatment                                                            */
+/* Paper theme: variables and Paper-only selectors.                           */
+/* Paper's overrides of Pine rules have been merged into the rules above, so   */
+/* each selector is declared once. A few rules below are deliberately kept    */
+/* late in the file because an earlier equal-specificity rule must lose.      */
 /* ========================================================================== */
 
 :root {
@@ -2861,7 +2860,7 @@ a {
   --ink: #1c1b1a;
   --pine: var(--flex-600);
   --pine-deep: color-mix(in srgb, var(--flex-600) 78%, black);
-  --muted: #6f6e69;
+  --muted: var(--ink);
   --hair: #e6e4d9;
   --accent-line: color-mix(in srgb, var(--pine) 40%, transparent);
   --accent-glow: color-mix(in srgb, var(--pine) 8%, transparent);
@@ -2922,7 +2921,7 @@ a {
     --ink: #cecdc3;
     --pine: var(--flex-400);
     --pine-deep: color-mix(in srgb, var(--flex-400) 72%, white);
-    --muted: #878580;
+    --muted: var(--ink);
     --hair: #282726;
     --accent-line: color-mix(in srgb, var(--pine) 40%, transparent);
     --accent-glow: color-mix(in srgb, var(--pine) 10%, transparent);
@@ -2939,7 +2938,7 @@ a {
   --ink: #cecdc3;
   --pine: var(--flex-400);
   --pine-deep: color-mix(in srgb, var(--flex-400) 72%, white);
-  --muted: #878580;
+  --muted: var(--ink);
   --hair: #282726;
   --accent-line: color-mix(in srgb, var(--pine) 40%, transparent);
   --accent-glow: color-mix(in srgb, var(--pine) 10%, transparent);
@@ -2977,16 +2976,6 @@ a {
   outline-offset: 2px;
 }
 
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--sans);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.6;
-  text-rendering: optimizeLegibility;
-}
-
 button,
 input,
 select,
@@ -3017,46 +3006,6 @@ summary:focus-visible {
 
 .lm-skip-link:focus {
   transform: translateY(0);
-}
-
-.lm-wrap {
-  width: 100%;
-  max-width: var(--col);
-  margin-inline: auto;
-  padding-inline: 24px;
-}
-
-/* Masthead shares the reading column's measure. */
-.lm-topbar {
-  position: absolute;
-  z-index: 100;
-  top: 0;
-  left: 50%;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  width: 100%;
-  max-width: var(--col);
-  padding: 14px 24px;
-  transform: translateX(-50%);
-}
-
-.lm-mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--ink);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
-}
-
-.lm-mark:hover {
-  color: var(--ink);
 }
 
 .lm-brand-mark {
@@ -3102,26 +3051,11 @@ summary:focus-visible {
   height: 19px;
 }
 
-.lm-nav-toggle {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
+/* Kept late on purpose: must win over an equal-specificity rule above. */
 .lm-nav {
-  position: absolute;
-  top: 50px;
-  right: 20px;
-  display: none;
-  width: min(210px, calc(100vw - 40px));
   margin: 0;
   padding: 8px;
   border: 1px solid var(--hair);
-  border-radius: 4px;
-  background: var(--paper);
-  box-shadow: 0 12px 32px rgb(16 15 15 / 0.12);
 }
 
 .lm-nav.lm-nav-open {
@@ -3151,27 +3085,15 @@ summary:focus-visible {
   color: var(--pine);
 }
 
+/* Kept late on purpose: must win over an equal-specificity rule above. */
 .lm-theme {
-  margin-top: 5px;
-  border-top: 1px solid var(--hair);
   padding-top: 12px;
 }
 
+/* Kept late on purpose: must win over an equal-specificity rule above. */
 .lm-theme svg {
   width: 16px;
   height: 16px;
-}
-
-/* Homepage and shared section language. */
-.lm-intro {
-  padding: 64px 0 0;
-}
-
-.lm-bio {
-  margin: 0;
-  color: var(--ink);
-  font-size: 16px;
-  line-height: 1.6;
 }
 
 .lm-bio a,
@@ -3189,36 +3111,6 @@ summary:focus-visible {
   text-underline-offset: 0.16em;
 }
 
-.lm-section {
-  padding: 24px 0 0;
-}
-
-.lm-label {
-  margin: 0 0 12px;
-  padding: 0 0 6px;
-  border-bottom: 1px solid var(--hair);
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.6;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.lm-section-head {
-  align-items: baseline;
-  margin: 0 0 12px;
-  padding: 0 0 6px;
-  border-bottom: 1px solid var(--hair);
-}
-
-.lm-section-head .lm-label {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
 .lm-section-link,
 .lm-more {
   color: var(--muted);
@@ -3233,23 +3125,11 @@ summary:focus-visible {
   text-decoration: none;
 }
 
-.lm-section-sub {
-  margin: -2px 0 12px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-
 .lm-contact .lm-label {
   margin-bottom: 10px;
 }
 
-.lm-social {
-  gap: 4px 0;
-  color: var(--ink);
-  font-size: 16px;
-}
-
+/* Kept late on purpose: must win over an equal-specificity rule above. */
 .lm-social a {
   color: var(--pine);
 }
@@ -3258,43 +3138,6 @@ summary:focus-visible {
   content: "/";
   margin: 0 7px;
   color: var(--muted);
-}
-
-.lm-stream {
-  gap: 0;
-}
-
-.lm-row {
-  gap: 18px;
-  min-height: 26px;
-  padding: 0;
-  border: 0;
-  line-height: 1.6;
-}
-
-.lm-row:last-child {
-  border: 0;
-}
-
-.lm-row-title {
-  overflow: hidden;
-  color: var(--pine);
-  font-size: 16px;
-  font-weight: 400;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.lm-row:hover .lm-row-title {
-  color: var(--pine-deep);
-}
-
-.lm-row-date {
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 16px;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 }
 
 .lm-work-list {
@@ -3441,12 +3284,6 @@ summary:focus-visible {
   min-width: 0;
 }
 
-.lm-project-title {
-  color: var(--pine);
-  font-size: 16px;
-  line-height: 1.4;
-}
-
 .lm-project-description {
   color: var(--muted);
   font-size: 14px;
@@ -3459,15 +3296,6 @@ summary:focus-visible {
 
 .lm-project-row:hover img {
   filter: saturate(1);
-}
-
-/* Archives and content pages use the same restrained hierarchy. */
-.lm-archive-head {
-  padding: 64px 0 18px;
-}
-
-.lm-breadcrumb {
-  margin: 64px 0 24px;
 }
 
 .lm-archive-head>.lm-label,
@@ -3494,12 +3322,6 @@ summary:focus-visible {
   line-height: 1.6;
 }
 
-.lm-archive-controls {
-  margin: 8px 0 12px;
-  padding: 8px 0;
-  border-block: 1px solid var(--hair);
-}
-
 .lm-chip,
 .lm-search {
   border-color: var(--hair);
@@ -3507,47 +3329,6 @@ summary:focus-visible {
   background: transparent;
   font-family: var(--sans);
   font-size: 13px;
-}
-
-.lm-chip.on {
-  border-color: var(--pine);
-  color: var(--btn-ink);
-  background: var(--pine);
-}
-
-.lm-archive-count {
-  font-family: var(--sans);
-  font-size: 13px;
-}
-
-.lm-archive-list {
-  margin-top: 0;
-}
-
-.lm-archive-row {
-  gap: 18px;
-  min-height: 27px;
-  padding: 0;
-  border: 0;
-  line-height: 1.6;
-}
-
-.lm-archive-row:last-child {
-  border: 0;
-}
-
-.lm-archive-row-title {
-  color: var(--pine);
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.lm-archive-row:hover .lm-archive-row-title {
-  color: var(--pine-deep);
-}
-
-.lm-archive-row-meta {
-  gap: 10px;
 }
 
 .lm-type,
@@ -3558,21 +3339,7 @@ summary:focus-visible {
   letter-spacing: 0.03em;
 }
 
-.lm-article-head {
-  padding: 64px 0 0;
-}
-
-.lm-article-meta {
-  margin: 2px 0 0;
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 14px;
-}
-
-.lm-article-lead {
-  margin-top: 24px;
-}
-
+/* Kept late on purpose: must win over an equal-specificity rule above. */
 .lm-article-lead img {
   border-radius: 2px;
 }
@@ -3592,42 +3359,12 @@ summary:focus-visible {
   }
 }
 
-.lm-prose {
-  margin: 24px 0 0;
-  color: var(--ink);
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-.lm-prose p {
-  margin: 0 0 1em;
-}
-
 .lm-prose h2,
 .lm-prose h3,
 .lm-prose h4 {
   color: var(--ink);
   font-family: var(--sans);
   letter-spacing: 0;
-}
-
-.lm-prose h2 {
-  margin: 2em 0 0.7em;
-  font-size: 18px;
-  line-height: 1.35;
-}
-
-.lm-prose h3 {
-  margin: 1.8em 0 0.65em;
-  font-size: 16px;
-  line-height: 1.4;
-}
-
-.lm-prose blockquote {
-  margin: 1.5em 0;
-  padding-left: 16px;
-  border-left: 2px solid var(--hair);
-  color: var(--muted);
 }
 
 mark {
@@ -3651,12 +3388,6 @@ mark {
 .lm-pager-count,
 .lm-prevnext-label {
   font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-}
-
-.lm-prose pre {
-  border: 1px solid var(--hair);
-  border-radius: 3px;
-  background: var(--field-bg);
 }
 
 .lm-article-footer,
@@ -3694,11 +3425,6 @@ mark {
   font-family: var(--sans);
 }
 
-.lm-news {
-  margin-top: 48px;
-  padding-top: 0;
-}
-
 .lm-news>.lm-label {
   margin-bottom: 10px;
 }
@@ -3709,10 +3435,6 @@ mark {
   font-size: 14px;
 }
 
-.lm-form {
-  max-width: 420px;
-}
-
 .lm-form input,
 .lm-form button {
   min-height: 38px;
@@ -3720,42 +3442,9 @@ mark {
   font-size: 14px;
 }
 
-.lm-form input {
-  border-color: var(--hair);
-  background: transparent;
-}
-
-.lm-form button {
-  background: var(--pine);
-}
-
-.lm-form button:hover {
-  background: var(--pine-deep);
-}
-
-.lm-footer {
-  margin-top: 48px;
-  padding: 18px 0 40px;
-  border-color: var(--hair);
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 12px;
-  line-height: 1.55;
-}
-
+/* Kept late on purpose: must win over an equal-specificity rule above. */
 .lm-footer a:hover {
   color: var(--pine);
-}
-
-.fast-search-box {
-  max-width: 600px;
-  border-color: var(--hair);
-  border-radius: 4px;
-  background: var(--paper);
-}
-
-#searchResults .meta {
-  font-family: var(--sans);
 }
 
 @media (max-width: 760px) {
@@ -3778,9 +3467,7 @@ mark {
 }
 
 @media (max-width: 600px) {
-  body {
-    font-size: 16px;
-  }
+  
 
   .lm-wrap {
     padding-inline: 20px;
@@ -3797,9 +3484,7 @@ mark {
     font-size: 16px;
   }
 
-  .lm-intro-meta {
-    padding-top: 0;
-  }
+  
 
   .lm-social {
     display: block;
@@ -3827,9 +3512,7 @@ mark {
     text-align: left;
   }
 
-  .lm-archive-row {
-    align-items: flex-start;
-  }
+  
 
   .lm-archive-row-meta {
     width: 100%;
@@ -3840,20 +3523,9 @@ mark {
     font-size: 16px;
   }
 
+  /* Kept late on purpose: must win over an equal-specificity rule above. */
   .lm-article-lede {
     font-size: 15px;
-  }
-
-  .lm-prose h2 {
-    font-size: 18px;
-  }
-
-  .lm-prose h3 {
-    font-size: 16px;
-  }
-
-  .lm-footer {
-    flex-direction: column;
   }
 }
 
@@ -3882,9 +3554,7 @@ mark {
 }
 
 /* ========================================================================== */
-/* Micro.blog additions. Everything above is a verbatim copy of               */
-/* themes/paper/assets/stylesheets/minimal.css in the jasonheppler.org repo;  */
-/* re-copy it to sync, then keep this block.                                  */
+/* Micro.blog additions.                                                      */
 /* ========================================================================== */
 .lm-photo-grid {
   display: grid;
@@ -3940,11 +3610,6 @@ mark {
   margin-top: 64px;
 }
 
-/* Stream posts: no box, one rule between posts; date leads the tag row; contain floated covers (book/movie posts). */
-.lm-mb-list {
-  gap: 32px;
-}
-
 .lm-mb-post,
 .lm-mb-post:hover {
   border: 0;
@@ -3957,18 +3622,8 @@ mark {
   border-bottom: 0;
 }
 
-.lm-mb-title {
-  margin: 0 0 12px;
-}
-
 .lm-mb-body {
   display: flow-root;
-}
-
-.lm-mb-tags {
-  margin-top: 14px;
-  padding-top: 0;
-  border-top: 0;
 }
 
 .lm-mb-tags .lm-mb-date {
